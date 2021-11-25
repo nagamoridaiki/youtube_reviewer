@@ -8,7 +8,9 @@
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
     "watch": "npm run build:dev -- --watch",
-    "start": "node ."
+    "start": "node .",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +31,10 @@
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-react": "^7.16.0",
-    "@babel/register": "^7.16.0"
+    "@babel/register": "^7.16.0",
+    "@storybook/addon-actions": "^6.3.12",
+    "@storybook/addon-links": "^6.3.12",
+    "@storybook/addons": "^6.3.12",
+    "@storybook/react": "^6.3.12"
   }
 }
