@@ -18,12 +18,16 @@ const Loading = styled.div`
 const VideosList = ({
   loading,
   videos,
+  withFavoriteButton,
 }) => (
   <>
     {!loading && !videos.length && <Typography>ビデオがありません</Typography>}
     {/* videosの中身の数だけVideosListItemを表示 */}
     {videos.map((video) => (
-      <StyledVideosListItem key={video.id} video={video} />
+      <StyledVideosListItem
+      key={video.id} 
+      video={video}
+      withFavoriteButton={withFavoriteButton} />
     ))}
     {/* ロード中はSpinnerを表示 */}
     {loading && <Loading><Spinner /></Loading>}
@@ -33,11 +37,13 @@ const VideosList = ({
 VideosList.propTypes = {
   videos: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool,
+  withFavoriteButton: PropTypes.bool,
 };
 
 VideosList.defaultProps = {
   videos: [],
   loading: false,
+  withFavoriteButton: false,
 };
 
 export default VideosList;

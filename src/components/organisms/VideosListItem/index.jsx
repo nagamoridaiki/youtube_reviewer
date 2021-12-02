@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';　
 import { useHistory } from 'react-router-dom';
 import Image from '~/components/atoms/Image';
+import FavoriteButton from '~/components/molecules/FavoriteButton';
 import Typography from '~/components/atoms/Typography';
 
 const Root = styled.div`
@@ -45,6 +46,12 @@ const ViewCount = styled(Typography)`
   margin-top: 5px;
 `;
 
+const StyledFavoriteButton = styled(FavoriteButton)`
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+`;
+
 const VideosListItemPresenter = ({
   className,
   onClick,
@@ -52,6 +59,8 @@ const VideosListItemPresenter = ({
   title,
   description,
   viewCount,
+  withFavoriteButton,
+  videoId,
 }) => (
   <Root className={className} onClick={onClick}>
     <Thumbnail>
@@ -59,11 +68,14 @@ const VideosListItemPresenter = ({
     </Thumbnail>
     <InfoWrapper>
       <Typography size="subtitle" bold display="inline-block">{title}</Typography>
-      <Description>{description}</Description>
+      <Description requireMarginForButton={withFavoriteButton}>{description}</Description>
       <ViewCount size="xs" color="gray">
         {viewCount}
         回視聴
       </ViewCount>
+      {withFavoriteButton && (
+        <StyledFavoriteButton videoId={videoId} />
+      )}
     </InfoWrapper>
   </Root>
 );
@@ -75,6 +87,8 @@ VideosListItemPresenter.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   viewCount: PropTypes.string.isRequired,
+  withFavoriteButton: PropTypes.bool,
+  videoId: PropTypes.string,
 };
 
 VideosListItemPresenter.defaultProps = {
@@ -99,6 +113,7 @@ const VideosListItemContainer = ({
       viewCount,
     },
   },
+  withFavoriteButton,
   presenter,
 }) => {
   // ページ遷移をさせるため、useHistoryを使ってhistoryオブジェクトを取得
@@ -113,6 +128,8 @@ const VideosListItemContainer = ({
     thumbnailUrl,
     description,
     viewCount,
+    withFavoriteButton,
+    videoId: id, 
   });
 };
 
@@ -133,10 +150,12 @@ VideosListItemContainer.propTypes = {
       viewCount: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  withFavoriteButton: PropTypes.bool,
 };
 
 VideosListItemContainer.defaultProps = {
   className: '',
+  withFavoriteButton: false,
 };
 
 export default (props) => (

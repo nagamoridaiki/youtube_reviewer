@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components';
+import FavoriteButton from '~/components/molecules/FavoriteButton';
 import Typography from '~/components/atoms/Typography';
 import PaperButton from '~/components/atoms/PaperButton';
 
@@ -11,8 +12,17 @@ const Root = styled.div`
   box-sizing: border-box;
 `;
 
+const TitleWrapper = styled.div`
+  display: flex;
+  align-items: flex-start;
+`;
+
 const Title = styled(Typography)`
   margin: 4px 0 10px;
+`;
+
+const StyledFavoriteButton = styled(FavoriteButton)`
+  flex-shrink: 0;
 `;
 
 const Description = styled(Typography)`
@@ -27,6 +37,7 @@ const Description = styled(Typography)`
 `;
 
 export const VideoInfoPresenter = ({
+  videoId,
   title,
   description,
   publishedAt,
@@ -35,7 +46,10 @@ export const VideoInfoPresenter = ({
   const [showAllDescription, setShowAllDescription] = useState(false);
   return (
     <Root>
-      <Title size="subtitle" bold>{title}</Title>
+      <TitleWrapper>
+        <Title size="subtitle" bold>{title}</Title>
+        <StyledFavoriteButton videoId={videoId} />
+      </TitleWrapper>
       <Typography size="xs" color="gray">
         {viewCount}
         回視聴・
@@ -54,6 +68,7 @@ export const VideoInfoPresenter = ({
 }
 
 VideoInfoPresenter.propTypes = {
+  videoId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   viewCount: PropTypes.string.isRequired,
   publishedAt: PropTypes.string.isRequired,
@@ -62,6 +77,7 @@ VideoInfoPresenter.propTypes = {
 
 const VideoInfoContainer = ({
   item: {
+    id: videoId,
     snippet: {
       publishedAt,
       title,
@@ -73,6 +89,7 @@ const VideoInfoContainer = ({
   },
   presenter,
 }) => (presenter({
+  videoId,
   title,
   viewCount,
   publishedAt: moment(publishedAt).format('YYYY/MM/DD'),
@@ -81,6 +98,7 @@ const VideoInfoContainer = ({
 
 VideoInfoContainer.propTypes = {
   item: PropTypes.shape({
+    id: PropTypes.string,
     snippet: PropTypes.shape({
       publishedAt: PropTypes.string,
       title: PropTypes.string,
