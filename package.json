@@ -20,6 +20,7 @@
     "core-js": "^3.19.1",
     "express": "^4.17.1",
     "googleapis": "^91.0.0",
+    "moment": "^2.29.1",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
