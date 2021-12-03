@@ -3,7 +3,7 @@ const { google } = require('googleapis');
 const { readFavoriteIds, writeFavoriteIds } = require('../utils/favorite');
 
 /* 先ほど取得したAPIキーを設定する */
-const YOUTUBE_API_KEY = 'XXXXXXXXXXXXXX';
+const YOUTUBE_API_KEY = 'XXXXXXXXXXXX';
 
 const youtube = google.youtube({
   version: 'v3',
