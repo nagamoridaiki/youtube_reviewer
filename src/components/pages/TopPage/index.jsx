@@ -18,7 +18,7 @@ export const TopPagePresenter = ({
     searchFormContents={(
       <SearchForm onSubmit={search} defaultValue={defaultKeyword} />
     )}
-    videosListContents={<VideosList videos={videos} loading={loading} /> }
+    videosListContents={<VideosList videos={videos} loading={loading} withFavoriteButton/> }
     onScrollEnd={searchNext}
   />
 );

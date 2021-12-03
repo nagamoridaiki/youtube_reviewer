@@ -14,6 +14,11 @@ const HeaderWrapper = styled.div`
   border-bottom: 1px solid #ccc;
 `;
 
+const TitleWrapper = styled.div`
+  max-width: 720px;
+  margin: auto;
+`;
+
 const SearchFormWrapper = styled.div`
   max-width: 720px;
   margin: auto;
@@ -26,6 +31,7 @@ const VideosListWrapper = styled.div`
 
 const VideosListTemplate = ({
   headerContents,
+  titleContents,
   searchFormContents,
   videosListContents,
   onScrollEnd,
@@ -36,6 +42,9 @@ const VideosListTemplate = ({
       <HeaderWrapper>
         {headerContents}
       </HeaderWrapper>
+      <TitleWrapper>
+        {titleContents}
+      </TitleWrapper>
       <SearchFormWrapper>
         {searchFormContents}
       </SearchFormWrapper>
@@ -48,6 +57,7 @@ const VideosListTemplate = ({
 
 VideosListTemplate.propTypes = {
   headerContents: PropTypes.node,
+  titleContents: PropTypes.node,
   searchFormContents: PropTypes.node,
   videosListContents: PropTypes.node.isRequired,
   onScrollEnd: PropTypes.func,
@@ -55,6 +65,7 @@ VideosListTemplate.propTypes = {
 
 VideosListTemplate.defaultProps = {
   headerContents: null,
+  titleContents: null,
   searchFormContents: null,
   onScrollEnd: null,
 };
